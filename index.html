@@ -1,0 +1,2382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AUREL — The Purest Pour. An avant-garde coffee experience." />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <title>AUREL — The Purest Pour</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#0a0a0a",
+            bone: "#e5e5e5",
+            bronze: "#9a8060",
+            bronzeLight: "#bca88b",
+          },
+          fontFamily: {
+            serif: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --bone: #e5e5e5;
+      --muted: #8a8882;
+      --bronze: #9a8060;
+      --line: rgba(229, 229, 229, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+      background: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--bone);
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      background: var(--bone);
+      color: var(--ink);
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .serif {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .tracking-luxury {
+      letter-spacing: 0.3em;
+    }
+
+    .tracking-wide-luxury {
+      letter-spacing: 0.18em;
+    }
+
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    .text-pretty {
+      text-wrap: pretty;
+    }
+
+    .clip-text {
+      overflow: hidden;
+    }
+
+    .clip-text > span {
+      display: block;
+      will-change: transform;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(229, 229, 229, 0.12);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+
+    .bronze-line {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(154, 128, 96, 0.7),
+        transparent
+      );
+    }
+
+    .hairline {
+      height: 1px;
+      background: var(--line);
+    }
+
+    /* Ambient background */
+    .ambient-glow {
+      position: absolute;
+      width: 55vw;
+      height: 55vw;
+      max-width: 900px;
+      max-height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(115, 87, 57, 0.13) 0%,
+        rgba(50, 40, 30, 0.04) 45%,
+        transparent 72%
+      );
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 100svh;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 24px 100px;
+    }
+
+    .hero-title {
+      font-size: clamp(3.8rem, 10.5vw, 10rem);
+      line-height: 0.84;
+      letter-spacing: -0.075em;
+      font-weight: 400;
+    }
+
+    .hero-title .italic {
+      margin-left: clamp(18px, 5vw, 90px);
+      font-style: italic;
+    }
+
+    .hero-visual {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .spline-container {
+      position: absolute;
+      top: 13%;
+      right: -5%;
+      width: 68vw;
+      height: 74vh;
+      min-width: 350px;
+      min-height: 480px;
+      max-width: 1000px;
+      border: 1px solid rgba(229, 229, 229, 0.06);
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(116, 91, 62, 0.09),
+          transparent 68%
+        ),
+        rgba(10, 10, 10, 0.1);
+      overflow: hidden;
+    }
+
+    .spline-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .spline-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+    .hero-bottom {
+      position: absolute;
+      z-index: 15;
+      bottom: 35px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+    }
+
+    /* Buttons */
+    .luxury-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      min-height: 56px;
+      padding: 16px 22px;
+      border: 1px solid rgba(229, 229, 229, 0.24);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition:
+        background 0.4s ease,
+        color 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.4s ease;
+    }
+
+    .luxury-btn:hover {
+      background: var(--bone);
+      color: var(--ink);
+      border-color: var(--bone);
+      transform: translateY(-2px);
+    }
+
+    .luxury-btn:focus-visible {
+      outline: 1px solid var(--bone);
+      outline-offset: 5px;
+    }
+
+    .luxury-btn .arrow {
+      transition: transform 0.4s ease;
+    }
+
+    .luxury-btn:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .luxury-btn.filled {
+      background: var(--bone);
+      color: var(--ink);
+      border-color: var(--bone);
+    }
+
+    .luxury-btn.filled:hover {
+      background: transparent;
+      color: var(--bone);
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* Marquee */
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 35px;
+      padding: 24px 0;
+      animation: marquee 32s linear infinite;
+    }
+
+    .marquee-track span {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #77736c;
+    }
+
+    .marquee-track .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--bronze);
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Editorial section */
+    .editorial-title {
+      font-size: clamp(3.4rem, 7.8vw, 8.5rem);
+      line-height: 0.91;
+      letter-spacing: -0.065em;
+    }
+
+    .editorial-image {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background: #161411;
+    }
+
+    .editorial-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) contrast(1.05);
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .editorial-image:hover img {
+      transform: scale(1.04);
+    }
+
+    .editorial-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent 55%,
+        rgba(10, 10, 10, 0.4)
+      );
+      pointer-events: none;
+    }
+
+    /* Bento grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      gap: 12px;
+    }
+
+    .bento-item {
+      position: relative;
+      overflow: hidden;
+      min-height: 330px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      isolation: isolate;
+    }
+
+    .bento-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(
+        circle at 70% 20%,
+        rgba(155, 124, 87, 0.12),
+        transparent 60%
+      );
+      pointer-events: none;
+    }
+
+    .bento-item .bento-number {
+      color: #6d665d;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+    }
+
+    .bento-item .bento-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+    }
+
+    .bento-item .bento-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    .bento-image {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.32;
+      mix-blend-mode: luminosity;
+      transition: transform 1s ease, opacity 0.6s ease;
+    }
+
+    .bento-item:hover .bento-image {
+      transform: scale(1.06);
+      opacity: 0.48;
+    }
+
+    .bento-large {
+      min-height: 450px;
+    }
+
+    .bento-featured {
+      background: #13120f;
+    }
+
+    .bento-featured .bento-name {
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+    }
+
+    .bento-graphic {
+      width: 130px;
+      height: 130px;
+      border: 1px solid rgba(188, 168, 139, 0.35);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bento-graphic::before {
+      content: "";
+      width: 70%;
+      height: 70%;
+      border: 1px solid rgba(188, 168, 139, 0.3);
+      border-radius: 50%;
+    }
+
+    .bento-graphic::after {
+      content: "A";
+      position: absolute;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 40px;
+      color: rgba(188, 168, 139, 0.7);
+    }
+
+    /* Product strip */
+    .product-row {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--line);
+    }
+
+    .product-item {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: center;
+      gap: 15px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding 0.4s ease;
+    }
+
+    .product-item:hover {
+      padding-left: 12px;
+      padding-right: 12px;
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .product-number {
+      color: #666158;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+    }
+
+    .product-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.35rem, 2.5vw, 2.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    /* Philosophy */
+    .philosophy {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-word {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(5rem, 17vw, 19rem);
+      line-height: 0.75;
+      letter-spacing: -0.1em;
+      color: rgba(229, 229, 229, 0.035);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Footer reveal */
+    .footer-reveal {
+      position: relative;
+      min-height: 85vh;
+      background: #10100e;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .footer-reveal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(
+          ellipse at 50% 110%,
+          rgba(131, 103, 72, 0.16),
+          transparent 60%
+        ),
+        linear-gradient(180deg, #0a0a0a 0%, #11100e 100%);
+    }
+
+    .footer-word {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(4rem, 12vw, 13rem);
+      line-height: 0.82;
+      letter-spacing: -0.08em;
+      font-weight: 400;
+    }
+
+    .footer-giant {
+      position: absolute;
+      left: 50%;
+      bottom: -4vw;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(9rem, 30vw, 38rem);
+      line-height: 0.65;
+      letter-spacing: -0.13em;
+      color: rgba(229, 229, 229, 0.025);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .footer-nav a {
+      position: relative;
+      display: inline-block;
+      color: #858078;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: var(--bone);
+    }
+
+    .footer-nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--bone);
+      transition: width 0.3s ease;
+    }
+
+    .footer-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Custom cursor */
+    .cursor-dot,
+    .cursor-ring {
+      display: none;
+    }
+
+    /* Tablet and desktop */
+    @media (min-width: 640px) {
+      .hero-content {
+        padding: 150px 48px 100px;
+      }
+
+      .hero-title {
+        font-size: clamp(5.5rem, 10.2vw, 10rem);
+      }
+
+      .hero-bottom {
+        left: 48px;
+        right: 48px;
+      }
+
+      .bento-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: minmax(250px, auto);
+      }
+
+      .bento-item {
+        min-height: 350px;
+      }
+
+      .bento-large {
+        min-height: 460px;
+      }
+
+      .product-item {
+        grid-template-columns: 60px 1fr auto;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding: 160px 6vw 100px;
+      }
+
+      .hero-title {
+        font-size: clamp(5rem, 10vw, 11rem);
+      }
+
+      .hero-visual {
+        z-index: 2;
+      }
+
+      .spline-container {
+        right: 2%;
+        width: 60vw;
+        height: 76vh;
+      }
+
+      .hero-bottom {
+        left: 6vw;
+        right: 6vw;
+      }
+
+      .bento-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .bento-item {
+        min-height: 280px;
+      }
+
+      .bento-large {
+        min-height: 500px;
+      }
+
+      .bento-featured {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .bento-tall {
+        grid-column: span 1;
+        grid-row: span 2;
+      }
+
+      .bento-wide {
+        grid-column: span 1;
+      }
+
+      .editorial-image {
+        aspect-ratio: 4 / 5;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+      }
+
+      .cursor-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--bone);
+        transform: translate(-50%, -50%);
+      }
+
+      .cursor-ring {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(229, 229, 229, 0.5);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.3s ease,
+          height 0.3s ease,
+          background 0.3s ease;
+      }
+
+      body.cursor-active .cursor-dot,
+      body.cursor-active .cursor-ring {
+        opacity: 1;
+      }
+
+      body.cursor-hover .cursor-ring {
+        width: 60px;
+        height: 60px;
+        background: rgba(229, 229, 229, 0.06);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .hero-content {
+        padding-left: 7vw;
+      }
+
+      .hero-title {
+        font-size: clamp(7rem, 10vw, 12rem);
+      }
+    }
+
+    /* Mobile refinements */
+    @media (max-width: 639px) {
+      .hero-content {
+        padding-top: 180px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.6rem, 16vw, 6rem);
+      }
+
+      .hero-title .italic {
+        margin-left: 14px;
+      }
+
+      .spline-container {
+        top: 28%;
+        right: -28%;
+        width: 95vw;
+        height: 58vh;
+        min-width: 0;
+        min-height: 0;
+        opacity: 0.8;
+      }
+
+      .hero-bottom {
+        bottom: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-bottom .scroll-label {
+        display: none;
+      }
+
+      .editorial-title {
+        font-size: clamp(3.2rem, 14vw, 5.5rem);
+      }
+
+      .bento-item,
+      .bento-large {
+        min-height: 300px;
+      }
+
+      .bento-featured {
+        min-height: 410px;
+      }
+
+      .philosophy-word {
+        font-size: 28vw;
+      }
+
+      .footer-reveal {
+        min-height: 70vh;
+      }
+
+      .footer-giant {
+        bottom: 0;
+      }
+    }
+
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .marquee-track {
+        animation: none;
+      }
+    }
+.aurel-video-panel{position:relative;width:100%;height:100%;overflow:hidden;background:#0b0b0b}
+    .aurel-hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.9;display:block;transform:translateZ(0);backface-visibility:hidden}
+    .aurel-panel-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 22%,rgba(5,5,5,.52) 100%)}
+@media(max-width:767px){
+.spline-container{position:relative;top:auto;right:auto;width:100%;height:54vh;min-width:0;min-height:360px;max-width:none;margin-top:20px}.aurel-hero-video{opacity:.72}
+}
+
+
+    /* Final video performance layer */
+    .aurel-video-panel { contain: layout paint; isolation: isolate; }
+    .aurel-panel-vignette { opacity: .22; }
+    @media (max-width: 767px) {
+      .hero-content { padding-top: 118px; padding-bottom: 48px; }
+      .hero-title { font-size: clamp(3.15rem, 15vw, 5.5rem); }
+      .spline-container { height: 52svh; min-height: 300px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aurel-hero-video { display: none; }
+      .aurel-video-panel { background: #16120e; }
+    }
+</style>
+</head>
+
+<body class="text-[#e5e5e5] antialiased overflow-x-hidden">
+<!-- Custom Cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Grain Overlay -->
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <!-- ========================================== -->
+  <!-- NAVIGATION -->
+  <!-- ========================================== -->
+
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <nav class="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-7 sm:px-12 lg:px-[6vw]">
+
+      <a href="#home" class="serif text-2xl tracking-tight" aria-label="AUREL Home">
+        AUREL<span class="text-[#9a8060]">.</span>
+      </a>
+
+      <div class="hidden items-center gap-10 md:flex">
+        <a href="#story" class="text-[9px] uppercase tracking-[0.28em] text-neutral-400 transition hover:text-white">
+          Our Story
+        </a>
+
+        <a href="#blends" class="text-[9px] uppercase tracking-[0.28em] text-neutral-400 transition hover:text-white">
+          Blends
+        </a>
+
+        <a href="#journal" class="text-[9px] uppercase tracking-[0.28em] text-neutral-400 transition hover:text-white">
+          Journal
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4 sm:gap-7">
+
+        <a href="#shop" class="hidden text-[9px] uppercase tracking-[0.28em] text-neutral-400 transition hover:text-white sm:block">
+          Shop
+        </a>
+
+        <button
+          id="menuToggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5 border border-white/10 transition hover:border-white/40 md:hidden"
+        >
+          <span class="block h-px w-4 bg-white transition"></span>
+          <span class="block h-px w-4 bg-white transition"></span>
+        </button>
+
+        <a
+          href="#shop"
+          class="hidden h-10 items-center justify-center border border-white/20 px-5 text-[9px] uppercase tracking-[0.22em] transition hover:bg-white hover:text-black sm:flex"
+        >
+          Explore
+        </a>
+
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="pointer-events-none invisible absolute left-0 right-0 top-full border-y border-white/10 bg-[#0a0a0a]/95 opacity-0 backdrop-blur-2xl transition-all duration-300 md:hidden"
+      aria-hidden="true"
+    >
+      <div class="flex flex-col gap-6 px-6 py-8">
+        <a href="#story" class="mobile-link text-xs uppercase tracking-[0.25em] text-neutral-300">Our Story</a>
+        <a href="#blends" class="mobile-link text-xs uppercase tracking-[0.25em] text-neutral-300">Signature Blends</a>
+        <a href="#journal" class="mobile-link text-xs uppercase tracking-[0.25em] text-neutral-300">Journal</a>
+        <a href="#shop" class="mobile-link text-xs uppercase tracking-[0.25em] text-[#bca88b]">Shop Collection →</a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================== -->
+
+    <section id="home" class="hero">
+
+      <div class="ambient-glow absolute right-[-10%] top-[10%]" aria-hidden="true"></div>
+
+      <!-- AI-GENERATED COFFEE VIDEO AREA -->
+      <div class="hero-visual" aria-label="AI-generated cinematic coffee video">
+
+        <div class="spline-container">
+<div class="aurel-video-panel">
+            <video class="aurel-hero-video" autoplay muted loop playsinline preload="auto" aria-label="Cinematic AI-generated coffee animation">
+              <source src="assets/coffee-ai-1080.mp4" type="video/mp4">
+            </video>
+            <div class="aurel-panel-vignette" aria-hidden="true"></div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Main Hero Content -->
+      <div class="hero-grid relative z-10">
+
+        <div class="hero-content">
+
+          <div class="mb-12 flex items-center gap-4 reveal">
+
+            <span class="h-px w-12 bg-[#9a8060]"></span>
+
+            <p class="text-[9px] uppercase tracking-[0.35em] text-neutral-400">
+              Specialty Coffee / Est. 2014
+            </p>
+
+          </div>
+
+
+          <h1 class="hero-title serif text-balance reveal delay-1">
+
+            <span class="block">THE</span>
+
+            <span class="italic block">PUREST</span>
+
+            <span class="block">POUR<span class="text-[#9a8060]">.</span></span>
+
+          </h1>
+
+
+          <div class="mt-12 max-w-[290px] reveal delay-2 sm:mt-16 sm:max-w-[350px]">
+
+            <p class="text-[10px] leading-[2] tracking-[0.12em] text-neutral-400">
+              Coffee, reduced to its essential beauty.
+              Exceptional origins. Meticulous craft.
+              Nothing unnecessary.
+            </p>
+
+            <a href="#blends" class="luxury-btn mt-8">
+              Discover the collection
+              <span class="arrow text-base">↗</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Hero Bottom Metadata -->
+      <div class="hero-bottom">
+
+        <div class="flex items-center gap-4">
+
+          <span class="h-px w-8 bg-[#9a8060]"></span>
+
+          <p class="text-[8px] uppercase tracking-[0.3em] text-neutral-500">
+            Single Origin / Small Batch
+          </p>
+
+        </div>
+
+        <div class="scroll-label flex items-center gap-4">
+
+          <p class="text-[8px] uppercase tracking-[0.3em] text-neutral-500">
+            Scroll to explore
+          </p>
+
+          <span class="text-[#9a8060]">↓</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         MARQUEE
+    ========================================== -->
+
+    <div class="marquee">
+
+      <div class="marquee-track">
+
+        <span>Exceptional Origins</span>
+        <span class="dot"></span>
+        <span>Thoughtful Craft</span>
+        <span class="dot"></span>
+        <span>The Purest Pour</span>
+        <span class="dot"></span>
+        <span>Slow Coffee Culture</span>
+        <span class="dot"></span>
+
+        <span>Exceptional Origins</span>
+        <span class="dot"></span>
+        <span>Thoughtful Craft</span>
+        <span class="dot"></span>
+        <span>The Purest Pour</span>
+        <span class="dot"></span>
+        <span>Slow Coffee Culture</span>
+        <span class="dot"></span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         OUR STORY / EDITORIAL
+    ========================================== -->
+
+    <section id="story" class="relative px-6 py-28 sm:px-12 sm:py-40 lg:px-[10vw] lg:py-52">
+
+      <div class="mx-auto max-w-[1400px]">
+
+        <div class="grid items-start gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+
+          <!-- Left Column -->
+
+          <div class="reveal">
+
+            <div class="mb-8 flex items-center gap-4">
+
+              <span class="text-[9px] tracking-[0.3em] text-[#9a8060]">
+                01
+              </span>
+
+              <span class="h-px w-8 bg-[#9a8060]"></span>
+
+              <span class="text-[9px] uppercase tracking-[0.3em] text-neutral-500">
+                The Philosophy
+              </span>
+
+            </div>
+
+            <h2 class="editorial-title serif text-balance">
+              Less<br />
+              <span class="italic text-[#bca88b]">noise.</span><br />
+              More<br />
+              <span class="italic">coffee.</span>
+            </h2>
+
+          </div>
+
+
+          <!-- Right Column -->
+
+          <div class="lg:pt-28">
+
+            <div class="editorial-image reveal">
+
+              <img
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=85"
+                alt="Artfully prepared specialty coffee in a minimalist setting"
+                loading="lazy"
+              />
+
+              <div class="absolute bottom-7 left-7 z-10">
+
+                <p class="text-[9px] uppercase tracking-[0.3em] text-white/60">
+                  The ritual
+                </p>
+
+                <p class="serif mt-2 text-2xl italic text-white/90">
+                  Take your time.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div class="mt-8 flex flex-col gap-8 sm:flex-row sm:justify-between">
+
+              <p class="max-w-[290px] text-[11px] leading-[2] tracking-[0.04em] text-neutral-500 reveal">
+                We believe exceptional coffee doesn't need
+                to demand attention. It earns it through
+                patience, precision, and character.
+              </p>
+
+              <div class="reveal delay-1">
+
+                <p class="text-[9px] uppercase tracking-[0.3em] text-[#9a8060]">
+                  Our approach
+                </p>
+
+                <p class="mt-3 text-[10px] leading-[1.9] text-neutral-500">
+                  Thoughtfully sourced.<br />
+                  Carefully roasted.<br />
+                  Intentionally served.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SIGNATURE BLENDS / BENTO BOX
+    ========================================== -->
+
+    <section id="blends" class="relative px-6 py-28 sm:px-12 sm:py-40 lg:px-[6vw] lg:py-48">
+
+      <div class="mx-auto max-w-[1600px]">
+
+        <div class="mb-16 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end">
+
+          <div class="reveal">
+
+            <div class="mb-8 flex items-center gap-4">
+
+              <span class="text-[9px] tracking-[0.3em] text-[#9a8060]">
+                02
+              </span>
+
+              <span class="h-px w-8 bg-[#9a8060]"></span>
+
+              <span class="text-[9px] uppercase tracking-[0.3em] text-neutral-500">
+                The Collection
+              </span>
+
+            </div>
+
+            <h2 class="serif text-5xl leading-[0.9] tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+              Signature<br />
+              <span class="italic text-[#bca88b]">Blends.</span>
+            </h2>
+
+          </div>
+
+          <p class="max-w-[270px] text-[10px] leading-[2] tracking-[0.1em] text-neutral-500 reveal delay-1">
+            Four expressions of origin.
+            Each with its own rhythm,
+            texture, and character.
+          </p>
+
+        </div>
+
+
+        <!-- Asymmetrical Bento Grid -->
+
+        <div class="bento-grid">
+
+          <!-- Featured Item -->
+
+          <article class="bento-item bento-featured glass bento-large reveal">
+
+            <img
+              class="bento-image"
+              src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1400&q=85"
+              alt=""
+              loading="lazy"
+            />
+
+            <div class="flex items-start justify-between">
+
+              <span class="bento-number">01 / SIGNATURE</span>
+
+              <span class="text-[9px] uppercase tracking-[0.25em] text-[#bca88b]">
+                Featured
+              </span>
+
+            </div>
+
+            <div class="relative z-10 mt-auto">
+
+              <p class="mb-5 text-[9px] uppercase tracking-[0.25em] text-[#bca88b]">
+                Ethiopia / Natural
+              </p>
+
+              <h3 class="bento-name">
+                Sol<br />
+                <span class="italic text-[#bca88b]">Noir.</span>
+              </h3>
+
+              <div class="bento-footer">
+
+                <p class="max-w-[180px] text-[10px] leading-[1.8] text-neutral-400">
+                  Floral complexity.
+                  Dark chocolate finish.
+                </p>
+
+                <a href="#shop" class="text-xl text-[#bca88b] transition hover:translate-x-1">
+                  ↗
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- Second Item -->
+
+          <article class="bento-item glass reveal delay-1">
+
+            <span class="bento-number">02 / SINGLE ORIGIN</span>
+
+            <div class="bento-graphic" aria-hidden="true"></div>
+
+            <div class="relative z-10 mt-auto">
+
+              <p class="mb-4 text-[9px] uppercase tracking-[0.25em] text-[#bca88b]">
+                Colombia / Washed
+              </p>
+
+              <h3 class="bento-name">
+                Alto<br />
+                <span class="italic text-neutral-400">Verde.</span>
+              </h3>
+
+              <div class="bento-footer">
+
+                <span class="text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                  Bright / Clean
+                </span>
+
+                <a href="#shop" class="text-lg text-[#bca88b] transition hover:translate-x-1">
+                  ↗
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- Third Item -->
+
+          <article class="bento-item glass reveal delay-2">
+
+            <span class="bento-number">03 / LIMITED</span>
+
+            <div class="absolute right-[-15px] top-[20%] h-44 w-44 rounded-full border border-[#9a8060]/20" aria-hidden="true"></div>
+
+            <div class="relative z-10 mt-auto">
+
+              <p class="mb-4 text-[9px] uppercase tracking-[0.25em] text-[#bca88b]">
+                Brazil / Natural
+              </p>
+
+              <h3 class="bento-name">
+                Terra<br />
+                <span class="italic text-neutral-400">Alta.</span>
+              </h3>
+
+              <div class="bento-footer">
+
+                <span class="text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                  Rich / Smooth
+                </span>
+
+                <a href="#shop" class="text-lg text-[#bca88b] transition hover:translate-x-1">
+                  ↗
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- Tall Fourth Item -->
+
+          <article class="bento-item bento-tall glass bento-large reveal delay-1">
+
+            <img
+              class="bento-image"
+              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=85"
+              alt=""
+              loading="lazy"
+            />
+
+            <span class="bento-number">04 / RESERVE</span>
+
+            <div class="relative z-10 mt-auto">
+
+              <p class="mb-5 text-[9px] uppercase tracking-[0.25em] text-[#bca88b]">
+                Kenya / Washed
+              </p>
+
+              <h3 class="bento-name">
+                Kivu<br />
+                <span class="italic text-neutral-300">Reserve.</span>
+              </h3>
+
+              <div class="bento-footer">
+
+                <span class="text-[9px] uppercase tracking-[0.2em] text-neutral-400">
+                  Complex / Elegant
+                </span>
+
+                <a href="#shop" class="text-xl text-[#bca88b] transition hover:translate-x-1">
+                  ↗
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <div class="mt-12 flex justify-end reveal">
+
+          <a href="#shop" class="luxury-btn">
+            View all origins
+            <span class="arrow text-base">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PHILOSOPHY / LARGE STATEMENT
+    ========================================== -->
+
+    <section class="philosophy relative border-y border-white/10 px-6 py-32 sm:px-12 sm:py-48 lg:py-64">
+
+      <div class="philosophy-word absolute left-[-5%] top-1/2 -translate-y-1/2">
+        AUREL
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-[1200px] text-center">
+
+        <div class="mb-10 flex items-center justify-center gap-4 reveal">
+
+          <span class="h-px w-8 bg-[#9a8060]"></span>
+
+          <span class="text-[9px] uppercase tracking-[0.3em] text-neutral-500">
+            The Aurel Standard
+          </span>
+
+          <span class="h-px w-8 bg-[#9a8060]"></span>
+
+        </div>
+
+        <h2 class="serif text-4xl leading-[1.05] tracking-[-0.055em] sm:text-6xl lg:text-8xl reveal">
+
+          "Great coffee is not<br />
+
+          <span class="italic text-[#bca88b]">rushed.</span> It is revealed."
+
+        </h2>
+
+        <div class="mx-auto mt-12 max-w-[340px] reveal delay-1">
+
+          <p class="text-[10px] leading-[2] tracking-[0.1em] text-neutral-500">
+            Every bean has a story.
+            Every cup is an invitation
+            to slow down and notice.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         JOURNAL
+    ========================================== -->
+
+    <section id="journal" class="px-6 py-28 sm:px-12 sm:py-40 lg:px-[10vw] lg:py-48">
+
+      <div class="mx-auto max-w-[1400px]">
+
+        <div class="mb-16 flex items-end justify-between gap-8 md:mb-24">
+
+          <div class="reveal">
+
+            <div class="mb-8 flex items-center gap-4">
+
+              <span class="text-[9px] tracking-[0.3em] text-[#9a8060]">
+                03
+              </span>
+
+              <span class="h-px w-8 bg-[#9a8060]"></span>
+
+              <span class="text-[9px] uppercase tracking-[0.3em] text-neutral-500">
+                From the Journal
+              </span>
+
+            </div>
+
+            <h2 class="serif text-5xl tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+              The Art of<br />
+              <span class="italic text-[#bca88b]">Slow.</span>
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="grid gap-10 md:grid-cols-2 md:gap-12">
+
+          <article class="group reveal">
+
+            <a href="#journal" class="block">
+
+              <div class="editorial-image aspect-[4/3]">
+
+                <img
+                  src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=85"
+                  alt="Freshly roasted coffee beans"
+                  loading="lazy"
+                />
+
+              </div>
+
+              <div class="mt-6 flex items-start justify-between gap-5">
+
+                <div>
+
+                  <p class="text-[9px] uppercase tracking-[0.25em] text-[#9a8060]">
+                    Origins / 01
+                  </p>
+
+                  <h3 class="serif mt-3 text-2xl tracking-[-0.04em] sm:text-3xl">
+                    A journey through origin.
+                  </h3>
+
+                </div>
+
+                <span class="text-xl text-neutral-500 transition group-hover:translate-x-1 group-hover:text-white">
+                  ↗
+                </span>
+
+              </div>
+
+              <p class="mt-4 max-w-[330px] text-[10px] leading-[2] text-neutral-500">
+                Discover the places and people behind
+                every exceptional bean.
+              </p>
+
+            </a>
+
+          </article>
+
+
+          <article class="group reveal delay-1 md:mt-24">
+
+            <a href="#journal" class="block">
+
+              <div class="editorial-image aspect-[4/3]">
+
+                <img
+                  src="https://images.unsplash.com/photo-1459755486867-b55449bb39ff?auto=format&fit=crop&w=1200&q=85"
+                  alt="Coffee brewing ritual"
+                  loading="lazy"
+                />
+
+              </div>
+
+              <div class="mt-6 flex items-start justify-between gap-5">
+
+                <div>
+
+                  <p class="text-[9px] uppercase tracking-[0.25em] text-[#9a8060]">
+                    Rituals / 02
+                  </p>
+
+                  <h3 class="serif mt-3 text-2xl tracking-[-0.04em] sm:text-3xl">
+                    The perfect morning ritual.
+                  </h3>
+
+                </div>
+
+                <span class="text-xl text-neutral-500 transition group-hover:translate-x-1 group-hover:text-white">
+                  ↗
+                </span>
+
+              </div>
+
+              <p class="mt-4 max-w-[330px] text-[10px] leading-[2] text-neutral-500">
+                A quieter way to begin the day,
+                one deliberate pour at a time.
+              </p>
+
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SHOP / COLLECTION
+    ========================================== -->
+
+    <section id="shop" class="border-y border-white/10 px-6 py-28 sm:px-12 sm:py-40 lg:px-[10vw] lg:py-48">
+
+      <div class="mx-auto max-w-[1200px]">
+
+        <div class="mb-16 text-center reveal">
+
+          <p class="mb-6 text-[9px] uppercase tracking-[0.35em] text-[#9a8060]">
+            The Collection
+          </p>
+
+          <h2 class="serif text-5xl tracking-[-0.06em] sm:text-7xl lg:text-8xl">
+            Find your<br />
+            <span class="italic text-[#bca88b]">ritual.</span>
+          </h2>
+
+        </div>
+
+
+        <div class="product-row">
+
+          <a href="#shop" class="product-item group reveal">
+
+            <span class="product-number">01</span>
+
+            <div>
+
+              <h3 class="product-name">
+                Sol Noir
+              </h3>
+
+              <p class="mt-2 text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Ethiopia / Natural
+              </p>
+
+            </div>
+
+            <span class="text-xl text-[#bca88b] transition group-hover:translate-x-1">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#shop" class="product-item group reveal delay-1">
+
+            <span class="product-number">02</span>
+
+            <div>
+
+              <h3 class="product-name">
+                Alto Verde
+              </h3>
+
+              <p class="mt-2 text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Colombia / Washed
+              </p>
+
+            </div>
+
+            <span class="text-xl text-[#bca88b] transition group-hover:translate-x-1">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#shop" class="product-item group reveal delay-2">
+
+            <span class="product-number">03</span>
+
+            <div>
+
+              <h3 class="product-name">
+                Terra Alta
+              </h3>
+
+              <p class="mt-2 text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Brazil / Natural
+              </p>
+
+            </div>
+
+            <span class="text-xl text-[#bca88b] transition group-hover:translate-x-1">
+              ↗
+            </span>
+
+          </a>
+
+
+          <a href="#shop" class="product-item group reveal delay-3">
+
+            <span class="product-number">04</span>
+
+            <div>
+
+              <h3 class="product-name">
+                Kivu Reserve
+              </h3>
+
+              <p class="mt-2 text-[9px] uppercase tracking-[0.2em] text-neutral-500">
+                Kenya / Washed
+              </p>
+
+            </div>
+
+            <span class="text-xl text-[#bca88b] transition group-hover:translate-x-1">
+              ↗
+            </span>
+
+          </a>
+
+        </div>
+
+
+        <div class="mt-12 flex justify-center reveal">
+
+          <a href="#contact" class="luxury-btn filled">
+            Inquire about the collection
+            <span class="arrow text-base">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         NEWSLETTER
+    ========================================== -->
+
+    <section id="contact" class="px-6 py-28 sm:px-12 sm:py-40 lg:px-[10vw] lg:py-48">
+
+      <div class="mx-auto max-w-[1000px] text-center">
+
+        <p class="mb-8 text-[9px] uppercase tracking-[0.35em] text-[#9a8060] reveal">
+          Stay in the ritual
+        </p>
+
+        <h2 class="serif text-4xl tracking-[-0.05em] sm:text-6xl lg:text-7xl reveal">
+          Something worth<br />
+          <span class="italic text-[#bca88b]">savouring.</span>
+        </h2>
+
+        <p class="mx-auto mt-8 max-w-[380px] text-[10px] leading-[2] tracking-[0.08em] text-neutral-500 reveal delay-1">
+          Receive occasional notes on new origins,
+          limited releases, and the art of coffee.
+        </p>
+
+
+        <form id="newsletterForm" class="mx-auto mt-12 flex max-w-[460px] flex-col gap-3 sm:flex-row reveal delay-2">
+
+          <label for="email" class="sr-only">
+            Your email address
+          </label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="Your email address"
+            class="min-h-[56px] min-w-0 flex-1 border border-white/15 bg-white/[0.02] px-5 text-[10px] tracking-[0.08em] text-white outline-none placeholder:text-neutral-600 focus:border-white/50"
+          />
+
+          <button type="submit" class="luxury-btn filled min-h-[56px] shrink-0">
+            Subscribe
+            <span class="arrow text-base">↗</span>
+          </button>
+
+        </form>
+
+        <p id="formMessage" class="mt-5 text-[10px] tracking-[0.08em] text-[#bca88b]" aria-live="polite"></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         REVEAL FOOTER
+    ========================================== -->
+
+    <footer class="footer-reveal px-6 py-20 sm:px-12 sm:py-28 lg:px-[6vw] lg:py-36">
+
+      <div class="relative z-10 mx-auto flex min-h-[60vh] max-w-[1600px] flex-col justify-between">
+
+        <div class="flex flex-col justify-between gap-16 lg:flex-row lg:items-start">
+
+          <div class="reveal">
+
+            <p class="mb-8 text-[9px] uppercase tracking-[0.35em] text-[#9a8060]">
+              A note from Aurel
+            </p>
+
+            <h2 class="footer-word">
+              Stay<br />
+              <span class="italic text-[#bca88b]">curious.</span>
+            </h2>
+
+          </div>
+
+
+          <div class="max-w-[270px] reveal delay-1 lg:pt-10">
+
+            <p class="text-[10px] leading-[2.1] tracking-[0.08em] text-neutral-500">
+              A slower approach to coffee.
+              Rooted in origin, guided by craft,
+              made for the moments between.
+            </p>
+
+            <a href="#home" class="luxury-btn mt-10">
+              Back to top
+              <span class="arrow text-base">↑</span>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="relative z-10 mt-32">
+
+          <div class="hairline mb-8"></div>
+
+          <div class="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+
+            <div>
+
+              <a href="#home" class="serif text-5xl tracking-[-0.06em] sm:text-7xl">
+                AUREL<span class="text-[#9a8060]">.</span>
+              </a>
+
+              <p class="mt-5 text-[8px] uppercase tracking-[0.3em] text-neutral-600">
+                The Purest Pour
+              </p>
+
+            </div>
+
+
+            <div class="footer-nav flex flex-wrap gap-x-8 gap-y-5">
+
+              <a href="#story">Our Story</a>
+
+              <a href="#blends">Blends</a>
+
+              <a href="#journal">Journal</a>
+
+              <a href="#contact">Contact</a>
+
+            </div>
+
+          </div>
+
+
+          <div class="mt-16 flex flex-col justify-between gap-5 border-t border-white/10 pt-7 sm:flex-row">
+
+            <p class="text-[8px] uppercase tracking-[0.25em] text-neutral-600">
+              © <span id="currentYear">2026</span> Aurel Coffee Company
+            </p>
+
+            <p class="text-[8px] uppercase tracking-[0.25em] text-neutral-600">
+              Crafted with intention.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-giant" aria-hidden="true">
+        AUREL
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+    "use strict";
+
+    /* -----------------------------------------
+       MOBILE MENU
+    ----------------------------------------- */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    function toggleMenu(open) {
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+
+      mobileMenu.classList.toggle("opacity-0", !open);
+      mobileMenu.classList.toggle("opacity-100", open);
+      mobileMenu.classList.toggle("invisible", !open);
+      mobileMenu.classList.toggle("visible", open);
+      mobileMenu.classList.toggle("pointer-events-none", !open);
+      mobileMenu.setAttribute("aria-hidden", String(!open));
+
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      toggleMenu(!isOpen);
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => toggleMenu(false));
+    });
+
+
+    /* -----------------------------------------
+       SCROLL REVEAL
+    ----------------------------------------- */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+
+      revealElements.forEach((element) => {
+        element.classList.add("is-visible");
+      });
+
+    } else {
+
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("is-visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px",
+        }
+      );
+
+      revealElements.forEach((element) => {
+        revealObserver.observe(element);
+      });
+
+    }
+
+
+    /* -----------------------------------------
+       CUSTOM CURSOR
+    ----------------------------------------- */
+
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorRing = document.querySelector(".cursor-ring");
+
+    if (
+      cursorDot &&
+      cursorRing &&
+      window.matchMedia("(pointer: fine)").matches
+    ) {
+
+      let mouseX = -100;
+      let mouseY = -100;
+      let ringX = -100;
+      let ringY = -100;
+
+      let cursorInitialized = false;
+
+      document.addEventListener("mousemove", (event) => {
+
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+
+        if (!cursorInitialized) {
+          ringX = mouseX;
+          ringY = mouseY;
+          cursorInitialized = true;
+        }
+
+        document.body.classList.add("cursor-active");
+
+        cursorDot.style.transform =
+          `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+
+      });
+
+      function animateCursor() {
+
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+
+        cursorRing.style.transform =
+          `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+        requestAnimationFrame(animateCursor);
+
+      }
+
+      animateCursor();
+
+      const interactiveElements = document.querySelectorAll(
+        "a, button, input, .bento-item"
+      );
+
+      interactiveElements.forEach((element) => {
+
+        element.addEventListener("mouseenter", () => {
+          document.body.classList.add("cursor-hover");
+        });
+
+        element.addEventListener("mouseleave", () => {
+          document.body.classList.remove("cursor-hover");
+        });
+
+      });
+
+      document.addEventListener("mouseleave", () => {
+        document.body.classList.remove("cursor-active");
+      });
+
+      document.addEventListener("mouseenter", () => {
+        document.body.classList.add("cursor-active");
+      });
+
+    }
+
+
+    /* -----------------------------------------
+       NEWSLETTER FORM
+    ----------------------------------------- */
+
+    const newsletterForm = document.getElementById("newsletterForm");
+    const formMessage = document.getElementById("formMessage");
+
+    newsletterForm.addEventListener("submit", (event) => {
+
+      event.preventDefault();
+
+      const emailInput = document.getElementById("email");
+      const email = emailInput.value.trim();
+
+      if (!email) return;
+
+      formMessage.textContent =
+        "Thank you. Connect your email service to complete your subscription.";
+
+      emailInput.value = "";
+
+    });
+
+
+    /* -----------------------------------------
+       CURRENT YEAR
+    ----------------------------------------- */
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+
+    /* -----------------------------------------
+       ESCAPE KEY
+    ----------------------------------------- */
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+        toggleMenu(false);
+      }
+
+    });
+
+  </script>
+
+<!-- =========================================
+     GSAP + SCROLLTRIGGER
+========================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  "use strict";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReducedMotion) {
+
+    /* =========================================
+       1. HERO TEXT MASK REVEAL
+       Slides text upward from hidden clipping.
+    ========================================== */
+
+    const heroTitle = document.querySelector(".hero-title");
+    const heroContent = document.querySelector(".hero-content");
+
+    if (heroTitle) {
+
+      // Create clipping wrappers around each text line
+      const heroLines = heroTitle.querySelectorAll(":scope > span");
+
+      heroLines.forEach((line) => {
+
+        const wrapper = document.createElement("span");
+
+        wrapper.style.display = "block";
+        wrapper.style.overflow = "hidden";
+        wrapper.style.position = "relative";
+
+        line.parentNode.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
+
+        gsap.set(line, {
+          yPercent: 115,
+          opacity: 1
+        });
+
+      });
+
+      const heroTimeline = gsap.timeline({
+        defaults: {
+          ease: "power4.out"
+        },
+        delay: 0.15
+      });
+
+      heroTimeline
+        .to(".hero-title > span > span", {
+          yPercent: 0,
+          duration: 1.8,
+          stagger: 0.13,
+          ease: "power4.out"
+        })
+        .from(".hero-content > .reveal:not(.hero-title)", {
+          y: 35,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.12,
+          ease: "power4.out"
+        }, "-=1.1");
+
+    }
+
+
+    /* =========================================
+       2. HERO METADATA REVEAL
+    ========================================== */
+
+    gsap.from(".hero-bottom", {
+      y: 25,
+      opacity: 0,
+      duration: 1.8,
+      delay: 0.9,
+      ease: "power4.out"
+    });
+
+
+    /* =========================================
+       3. SPLINE 3D PARALLAX
+       Moves at a different speed than content.
+    ========================================== */
+
+    const splineContainer = document.querySelector(
+      ".spline-container"
+    );
+
+    if (splineContainer) {
+
+      gsap.to(splineContainer, {
+        y: 180,
+        rotation: 1.5,
+        ease: "none",
+
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 2
+        }
+
+      });
+
+    }
+
+
+    /* =========================================
+       4. BENTO BOX STAGGER REVEAL
+       Each item enters sequentially.
+    ========================================== */
+
+    const bentoItems = gsap.utils.toArray(".bento-item");
+
+    bentoItems.forEach((item, index) => {
+
+      gsap.fromTo(item,
+
+        {
+          y: 90,
+          opacity: 0,
+          scale: 0.96,
+          clipPath: "inset(12% 0% 0% 0%)"
+        },
+
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+
+          duration: 1.8,
+          ease: "power4.out",
+
+          scrollTrigger: {
+            trigger: item,
+            start: "top 88%",
+            toggleActions: "play none none reverse"
+          },
+
+          delay: index * 0.12
+
+        }
+
+      );
+
+    });
+
+
+    /* =========================================
+       5. EDITORIAL IMAGE PARALLAX
+    ========================================== */
+
+    gsap.utils.toArray(".editorial-image img").forEach((image) => {
+
+      gsap.fromTo(image,
+
+        {
+          scale: 1.12,
+          yPercent: -5
+        },
+
+        {
+          scale: 1,
+          yPercent: 5,
+          ease: "none",
+
+          scrollTrigger: {
+            trigger: image.closest(".editorial-image"),
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 2
+          }
+
+        }
+
+      );
+
+    });
+
+
+    /* =========================================
+       6. PHILOSOPHY TEXT PARALLAX
+    ========================================== */
+
+    gsap.to(".philosophy-word", {
+
+      xPercent: -12,
+      ease: "none",
+
+      scrollTrigger: {
+        trigger: ".philosophy",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 2
+      }
+
+    });
+
+
+    /* =========================================
+       7. FOOTER REVEAL ANIMATION
+    ========================================== */
+
+    gsap.from(".footer-word", {
+
+      yPercent: 35,
+      opacity: 0,
+      duration: 2,
+      ease: "power4.out",
+
+      scrollTrigger: {
+        trigger: ".footer-reveal",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+
+    });
+
+
+    /* =========================================
+       8. REFRESH SCROLLTRIGGER
+    ========================================== */
+
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
+
+  }
+</script>
+
+<script>
+(() => {
+  const video = document.querySelector('.aurel-hero-video');
+  if (!video) return;
+  const source = video.querySelector('source');
+  const mobile = window.matchMedia('(max-width: 767px)').matches;
+  const selected = mobile ? 'assets/coffee-ai-720.mp4' : 'assets/coffee-ai-1080.mp4';
+  if (source && source.getAttribute('src') !== selected) {
+    source.setAttribute('src', selected);
+    video.load();
+  }
+  const start = () => {
+    const p = video.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+  video.addEventListener('canplay', start, { once: true });
+  start();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.pause();
+  }
+})();
+</script>
+
+</body>
+</html>
+
